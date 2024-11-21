@@ -1,0 +1,3 @@
+/home/schwaad/Área de trabalho/Programação/C/EDB2/Controle_Trafego_Aereo/build/CMakeFiles/EDB2TrafegoAereo.dir
+/home/schwaad/Área de trabalho/Programação/C/EDB2/Controle_Trafego_Aereo/build/CMakeFiles/edit_cache.dir
+/home/schwaad/Área de trabalho/Programação/C/EDB2/Controle_Trafego_Aereo/build/CMakeFiles/rebuild_cache.dir
