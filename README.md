@@ -5,7 +5,7 @@ Esse é o repositório do projeto 1B da segunda unidade da disciplina de Estrutu
 
 ---
 
-# Funções:
+## Funções:
 
 - Carregar aeronaves de um arquivo `.csv`
 - Inserir aeronaves
@@ -16,5 +16,15 @@ Esse é o repositório do projeto 1B da segunda unidade da disciplina de Estrutu
 
 ---
 
-# Rodando o projeto
+## Rodando o projeto:
+
+Execute os seguintes comandos em um terminal:
+
+```terminal 
+git clone https://github.com/schwaad/EDB2-Trafego-Aereo
+cd EDB2-Trafego-Aereo
+cd build
+make
+./EDB2TrafegoAereo
+```
 
