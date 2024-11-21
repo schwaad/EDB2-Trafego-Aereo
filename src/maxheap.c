@@ -50,3 +50,86 @@ void liberaHeap(MaxHeap *heap) {
   free(heap->aeronave);
   free(heap);
 }
+
+void imprimeHeap(MaxHeap *heap) {
+  for (int i = 0; i < heap->size; i++) {
+    printf("Aeronave %d: %s (Prioridade: %d)\n", i + 1,
+           heap->aeronave[i].identificador, heap->aeronave[i].prioridade);
+  }
+}
+
+void imprimeMaiorPrioridade(MaxHeap *heap) {
+  printf("Maior prioridade: %s (Prioridade: %d)",
+         heap->aeronave[0].identificador, heap->aeronave[0].prioridade);
+}
+
+void heapifyUp(MaxHeap *heap, int index) {
+  int parent = (index - 1) / 2;
+  if (parent >= 0 &&
+      heap->aeronave[index].prioridade > heap->aeronave[parent].prioridade) {
+    Aeronave temp = heap->aeronave[index];
+    heap->aeronave[index] = heap->aeronave[parent];
+    heap->aeronave[parent] = temp;
+    heapifyUp(heap, parent);
+  }
+}
+
+void heapifyDown(MaxHeap *heap, int index) {
+  int leftChild = 2 * index + 1;
+  int rightChild = 2 * index + 2;
+  int largest = index;
+
+  if (leftChild < heap->size && heap->aeronave[leftChild].prioridade >
+                                    heap->aeronave[largest].prioridade) {
+    largest = leftChild;
+  }
+  if (rightChild < heap->size && heap->aeronave[rightChild].prioridade >
+                                     heap->aeronave[largest].prioridade) {
+    largest = rightChild;
+  }
+  if (largest != index) {
+    Aeronave temp = heap->aeronave[index];
+    heap->aeronave[index] = heap->aeronave[largest];
+    heap->aeronave[largest] = temp;
+    heapifyDown(heap, largest);
+  }
+}
+
+MaxHeap *removePrimeiraAeronave(MaxHeap *heap) {
+  if (heap->size <= 0) {
+    printf("Heap está vazia. Não há aeronaves para remover.\n");
+    return heap;
+  }
+
+  heap->aeronave[0] = heap->aeronave[heap->size - 1];
+  heap->size--;
+
+  heapifyDown(heap, 0);
+
+  return heap;
+}
+
+MaxHeap *editarAeronave(MaxHeap *heap) {
+  printf(
+      "Escolha uma aeronave para editar as informações (insira o indice):\n");
+  imprimeHeap(heap);
+  int indice;
+  scanf("%d", &indice);
+
+  if (indice < 0 || indice >= heap->size) {
+    printf("Índice inválido.\n");
+    return heap;
+  }
+
+  printf("Digite as novas informações (combustível, horário, tipo, "
+         "emergência):\n");
+  int combustivel, horario, tipo, emergencia;
+  scanf("%d %d %d %d", &combustivel, &horario, &tipo, &emergencia);
+
+  heap->aeronave[indice] = criaAeronave(heap->aeronave[indice].identificador,
+                                        combustivel, horario, tipo, emergencia);
+  heapifyUp(heap, indice);
+  heapifyDown(heap, indice);
+
+  return heap;
+}
