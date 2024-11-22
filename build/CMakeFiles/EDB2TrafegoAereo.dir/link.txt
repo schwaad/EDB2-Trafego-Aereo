@@ -1,1 +1,1 @@
-/usr/bin/cc CMakeFiles/EDB2TrafegoAereo.dir/src/aeronave.c.o CMakeFiles/EDB2TrafegoAereo.dir/src/main.c.o CMakeFiles/EDB2TrafegoAereo.dir/src/maxheap.c.o -o EDB2TrafegoAereo
+/usr/bin/cc CMakeFiles/EDB2TrafegoAereo.dir/src/aeronave.c.o CMakeFiles/EDB2TrafegoAereo.dir/src/main.c.o CMakeFiles/EDB2TrafegoAereo.dir/src/maxheap.c.o CMakeFiles/EDB2TrafegoAereo.dir/src/utils.c.o -o EDB2TrafegoAereo

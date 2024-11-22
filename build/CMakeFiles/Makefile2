@@ -81,12 +81,12 @@ clean: CMakeFiles/EDB2TrafegoAereo.dir/clean
 CMakeFiles/EDB2TrafegoAereo.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/EDB2TrafegoAereo.dir/build.make CMakeFiles/EDB2TrafegoAereo.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/EDB2TrafegoAereo.dir/build.make CMakeFiles/EDB2TrafegoAereo.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir="/home/schwaad/Área de trabalho/Programação/C/EDB2/Controle_Trafego_Aereo/build/CMakeFiles" --progress-num=1,2,3,4 "Built target EDB2TrafegoAereo"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir="/home/schwaad/Área de trabalho/Programação/C/EDB2/Controle_Trafego_Aereo/build/CMakeFiles" --progress-num=1,2,3,4,5 "Built target EDB2TrafegoAereo"
 .PHONY : CMakeFiles/EDB2TrafegoAereo.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/EDB2TrafegoAereo.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "/home/schwaad/Área de trabalho/Programação/C/EDB2/Controle_Trafego_Aereo/build/CMakeFiles" 4
+	$(CMAKE_COMMAND) -E cmake_progress_start "/home/schwaad/Área de trabalho/Programação/C/EDB2/Controle_Trafego_Aereo/build/CMakeFiles" 5
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/EDB2TrafegoAereo.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start "/home/schwaad/Área de trabalho/Programação/C/EDB2/Controle_Trafego_Aereo/build/CMakeFiles" 0
 .PHONY : CMakeFiles/EDB2TrafegoAereo.dir/rule

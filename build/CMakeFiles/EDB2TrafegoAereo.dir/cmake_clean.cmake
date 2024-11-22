@@ -5,6 +5,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/EDB2TrafegoAereo.dir/src/main.c.o.d"
   "CMakeFiles/EDB2TrafegoAereo.dir/src/maxheap.c.o"
   "CMakeFiles/EDB2TrafegoAereo.dir/src/maxheap.c.o.d"
+  "CMakeFiles/EDB2TrafegoAereo.dir/src/utils.c.o"
+  "CMakeFiles/EDB2TrafegoAereo.dir/src/utils.c.o.d"
   "EDB2TrafegoAereo"
   "EDB2TrafegoAereo.pdb"
 )
