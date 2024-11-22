@@ -18,10 +18,16 @@ void imprimeHeap(MaxHeap *heap);
 
 void imprimeMaiorPrioridade(MaxHeap *heap);
 
+MaxHeap *cmpLeftRight(MaxHeap *heap);
+
 MaxHeap *removePrimeiraAeronave(MaxHeap *heap);
 
 MaxHeap *editarAeronave(MaxHeap *heap);
 
-void heapifyUp(MaxHeap *heap, int index);
+MaxHeap *heapifyUp(MaxHeap *heap, int index);
 
-void heapifyDown(MaxHeap *heap, int index);
+MaxHeap *carregaHeap(const char *caminho);
+
+void salvaHeap(const MaxHeap *heap, const char *caminho);
+
+MaxHeap *heapifyDown(MaxHeap *heap, int index);
