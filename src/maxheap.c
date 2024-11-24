@@ -42,11 +42,14 @@ MaxHeap *insereAeronave(Aeronave aeronave, MaxHeap *heap) {
 }
 
 void liberaHeap(MaxHeap *heap) {
+  for (int i = 0; i < heap->size; i++) {
+    free(heap->aeronave[i].identificador); // Libera o identificador alocado
+  }
   free(heap->aeronave);
   free(heap);
 }
-
 void imprimeHeap(MaxHeap *heap) {
+  printf("\n");
   for (int i = 0; i < heap->size; i++) {
     printf("Aeronave %d: %s (Prioridade: %d)\n", i + 1,
            heap->aeronave[i].identificador, heap->aeronave[i].prioridade);
@@ -176,12 +179,12 @@ MaxHeap *carregaHeap(const char *caminho) {
   int indice = 0;
   while (fgets(linha, sizeof(linha), arquivo)) {
     char identificador[50]; // Espaço suficiente para o identificador
-    int prioridade, combustivel, horario, tipo, emergencia;
+    int combustivel, horario, tipo, emergencia;
 
     // Lê os dados da linha, garantindo que o identificador seja lido
     // corretamente
-    sscanf(linha, "%49[^,],%d,%d,%d,%d,%d", identificador, &prioridade,
-           &combustivel, &horario, &tipo, &emergencia);
+    sscanf(linha, "%49[^,],%d,%d,%d,%d", identificador, &combustivel, &horario,
+           &tipo, &emergencia);
 
     // Aloca dinamicamente para o identificador
     char *identificadorCopia = (char *)malloc(strlen(identificador) + 1);
@@ -202,6 +205,8 @@ MaxHeap *carregaHeap(const char *caminho) {
     // Cria a aeronave e insere na heap
     Aeronave novaAeronave = criaAeronave(identificadorCopia, combustivel,
                                          horario, tipo, emergencia);
+    novaAeronave.prioridade =
+        calculaPrioridade(combustivel, horario, tipo, emergencia);
     insereAeronave(novaAeronave, heap);
 
     indice++;
