@@ -24,7 +24,6 @@ Execute os seguintes comandos em um terminal:
 git clone https://github.com/schwaad/EDB2-Trafego-Aereo
 cd EDB2-Trafego-Aereo
 cd build
-make
 ./EDB2TrafegoAereo
 ```
 
