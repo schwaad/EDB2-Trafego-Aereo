@@ -43,7 +43,7 @@ MaxHeap *insereAeronave(Aeronave aeronave, MaxHeap *heap) {
 
 void liberaHeap(MaxHeap *heap) {
   for (int i = 0; i < heap->size; i++) {
-    free(heap->aeronave[i].identificador); // Libera o identificador alocado
+    free(heap->aeronave[i].identificador);
   }
   free(heap->aeronave);
   free(heap);
@@ -175,14 +175,12 @@ MaxHeap *carregaHeap(const char *caminho) {
   }
 
   MaxHeap *heap = criaHeap();
-  char linha[100]; // Tamanho adequado para armazenar uma linha do CSV
+  char linha[100];
   int indice = 0;
   while (fgets(linha, sizeof(linha), arquivo)) {
-    char identificador[50]; // Espaço suficiente para o identificador
+    char identificador[50];
     int combustivel, horario, tipo, emergencia;
 
-    // Lê os dados da linha, garantindo que o identificador seja lido
-    // corretamente
     sscanf(linha, "%49[^,],%d,%d,%d,%d", identificador, &combustivel, &horario,
            &tipo, &emergencia);
 
@@ -192,17 +190,13 @@ MaxHeap *carregaHeap(const char *caminho) {
       perror("Erro ao alocar memória para identificador");
       exit(1);
     }
-    strcpy(identificadorCopia,
-           identificador); // Copia o identificador para a memória alocada
-
-    // Se necessário, realoca a heap
+    strcpy(identificadorCopia, identificador);
     if (heap->size >= heap->capacity) {
       heap->capacity *= 2;
       heap->aeronave = (Aeronave *)realloc(heap->aeronave,
                                            heap->capacity * sizeof(Aeronave));
     }
 
-    // Cria a aeronave e insere na heap
     Aeronave novaAeronave = criaAeronave(identificadorCopia, combustivel,
                                          horario, tipo, emergencia);
     novaAeronave.prioridade =

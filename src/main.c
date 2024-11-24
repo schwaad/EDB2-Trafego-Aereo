@@ -96,7 +96,7 @@ int main() {
       char caminho[255];
       printf("Informe o caminho do arquivo csv: ");
       fgets(caminho, sizeof(caminho), stdin);
-      caminho[strcspn(caminho, "\n")] = '\0'; // Remove o '\n'
+      caminho[strcspn(caminho, "\n")] = '\0';
       heap = carregaHeap(caminho);
       printf("Heap carregada com sucesso.\n");
       imprimeHeap(heap);
