@@ -6,6 +6,9 @@
 
 void menuInicial();
 void menuSistemaControle();
+int menuInput();
 void clearTerminal();
+void pauseProgram();
+void clearBuffer();
 
 #endif
