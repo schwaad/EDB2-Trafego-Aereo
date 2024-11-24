@@ -1,4 +1,5 @@
 #include <stdbool.h>
+#include <string.h>
 
 #ifndef AERONAVE_H
 #define AERONAVE_H

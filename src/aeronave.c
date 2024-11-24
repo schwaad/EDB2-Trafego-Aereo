@@ -9,12 +9,13 @@ int calculaPrioridade(int combustivel, int horario, int tipo, int emergencia) {
 Aeronave criaAeronave(char *identificador, int combustivel, int horario,
                       int tipo, int emergencia) {
   Aeronave novaAeronave;
-  novaAeronave.identificador = identificador;
+  novaAeronave.identificador = strdup(
+      identificador); // Duplica o identificador para evitar compartilhamento
   novaAeronave.combustivel = combustivel;
   novaAeronave.horario = horario;
   novaAeronave.tipo = tipo;
   novaAeronave.emergencia = emergencia;
-  novaAeronave.prioridade =
-      calculaPrioridade(combustivel, horario, tipo, emergencia);
+  novaAeronave.prioridade = calculaPrioridade(
+      combustivel, horario, tipo, emergencia); // Calcular prioridade
   return novaAeronave;
 }
