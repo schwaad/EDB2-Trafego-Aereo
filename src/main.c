@@ -34,9 +34,7 @@ int main() {
           int combustivel, horario, tipo, emergencia;
 
           printf("Digite o identificador da aeronave:\n");
-          fgets(identificador, sizeof(identificador), stdin);
-          identificador[strcspn(identificador, "\n")] =
-              '\0'; // Remove o '\n' ao final
+          fgets(identificador, 50, stdin);
 
           printf("Digite o combustível da aeronave:\n");
           scanf("%d", &combustivel);
@@ -102,6 +100,7 @@ int main() {
       imprimeHeap(heap);
       clearBuffer();
       pauseProgram();
+      clearBuffer();
       while (1) {
         clearTerminal();
         menuSistemaControle();
@@ -116,9 +115,7 @@ int main() {
           int combustivel, horario, tipo, emergencia;
 
           printf("Digite o identificador da aeronave:\n");
-          fgets(identificador, sizeof(identificador), stdin);
-          identificador[strcspn(identificador, "\n")] =
-              '\0'; // Remove o '\n' ao final
+          fgets(identificador, 50, stdin);
 
           printf("Digite o combustível da aeronave:\n");
           scanf("%d", &combustivel);

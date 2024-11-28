@@ -18,8 +18,6 @@ void imprimeHeap(MaxHeap *heap);
 
 void imprimeMaiorPrioridade(MaxHeap *heap);
 
-MaxHeap *cmpLeftRight(MaxHeap *heap);
-
 MaxHeap *removePrimeiraAeronave(MaxHeap *heap);
 
 MaxHeap *editarAeronave(MaxHeap *heap);

@@ -30,13 +30,44 @@ MaxHeap *redimensionaHeap(MaxHeap *heap) {
   return heap;
 }
 
+void imprimeHeap(MaxHeap *heap) {
+  MaxHeap *heapTemp = (MaxHeap *)malloc(sizeof(MaxHeap));
+  heapTemp->capacity = heap->capacity;
+  heapTemp->size = heap->size;
+  heapTemp->aeronave = (Aeronave *)malloc(heap->capacity * sizeof(Aeronave));
+
+  for (int i = 0; i < heap->size; i++) {
+    heapTemp->aeronave[i] = heap->aeronave[i];
+  }
+
+  int indice = 1;
+  while (heapTemp->size > 0) {
+    Aeronave maiorPrioridade = heapTemp->aeronave[0];
+
+    printf("Aeronave %d: %s (Prioridade: %d)\n", indice,
+           maiorPrioridade.identificador, maiorPrioridade.prioridade);
+
+    heapTemp->aeronave[0] = heapTemp->aeronave[heapTemp->size - 1];
+    heapTemp->size--;
+
+    heapifyDown(heapTemp, 0);
+    indice++;
+  }
+
+  free(heapTemp->aeronave);
+  free(heapTemp);
+}
+
 MaxHeap *insereAeronave(Aeronave aeronave, MaxHeap *heap) {
   if (heap->size >= heap->capacity) {
     heap = redimensionaHeap(heap);
   }
 
+  // Inserir a nova aeronave na última posição da heap.
   heap->aeronave[heap->size] = aeronave;
+
   heap = heapifyUp(heap, heap->size);
+
   heap->size++;
   return heap;
 }
@@ -47,13 +78,6 @@ void liberaHeap(MaxHeap *heap) {
   }
   free(heap->aeronave);
   free(heap);
-}
-void imprimeHeap(MaxHeap *heap) {
-  printf("\n");
-  for (int i = 0; i < heap->size; i++) {
-    printf("Aeronave %d: %s (Prioridade: %d)\n", i + 1,
-           heap->aeronave[i].identificador, heap->aeronave[i].prioridade);
-  }
 }
 
 void imprimeMaiorPrioridade(MaxHeap *heap) {
@@ -76,40 +100,25 @@ MaxHeap *heapifyUp(MaxHeap *heap, int index) {
 MaxHeap *heapifyDown(MaxHeap *heap, int indice) {
   int filhoEsq = 2 * indice + 1;
   int filhoDir = 2 * indice + 2;
+  int maior = indice;
 
-  if (filhoEsq > heap->size) {
-    return heap;
+  if (filhoEsq < heap->size &&
+      heap->aeronave[filhoEsq].prioridade > heap->aeronave[maior].prioridade) {
+    maior = filhoEsq;
   }
-  if (heap->aeronave[filhoEsq].prioridade <
-      heap->aeronave[filhoDir].prioridade) {
-    Aeronave temp = heap->aeronave[filhoEsq];
-    heap->aeronave[filhoEsq] = heap->aeronave[filhoDir];
-    heap->aeronave[filhoDir] = temp;
-  }
-  if (heap->aeronave[indice].prioridade < heap->aeronave[filhoEsq].prioridade) {
-    Aeronave temp = heap->aeronave[filhoEsq];
-    heap->aeronave[filhoEsq] = heap->aeronave[indice];
-    heap->aeronave[indice] = temp;
-    heapifyDown(heap, indice++);
-  }
-}
 
-MaxHeap *cmpLeftRight(MaxHeap *heap) {
-  int i = heap->size - 1;
-  while (i >= 0) {
-    int filhoEsq = 2 * i + 1;
-    int filhoDir = 2 * i + 2;
-
-    if (filhoEsq < heap->size && filhoDir < heap->size &&
-        heap->aeronave[filhoEsq].prioridade <
-            heap->aeronave[filhoDir].prioridade) {
-      Aeronave temp = heap->aeronave[filhoEsq];
-      heap->aeronave[filhoEsq] = heap->aeronave[filhoDir];
-      heap->aeronave[filhoDir] = temp;
-    }
-
-    i--;
+  if (filhoDir < heap->size &&
+      heap->aeronave[filhoDir].prioridade > heap->aeronave[maior].prioridade) {
+    maior = filhoDir;
   }
+
+  if (maior != indice) {
+    Aeronave temp = heap->aeronave[indice];
+    heap->aeronave[indice] = heap->aeronave[maior];
+    heap->aeronave[maior] = temp;
+    heap = heapifyDown(heap, maior);
+  }
+
   return heap;
 }
 
@@ -128,18 +137,29 @@ MaxHeap *removePrimeiraAeronave(MaxHeap *heap) {
 }
 
 MaxHeap *editarAeronave(MaxHeap *heap) {
-  printf(
-      "\nEscolha uma aeronave para editar as informações (insira o índice):\n");
+  printf("\nEscolha uma aeronave para editar as informações:\n");
   imprimeHeap(heap);
 
-  int indice;
-  scanf("%d", &indice);
-  indice -= 1;
+  char identificador[50];
+  Aeronave tempAeronave;
+  int indice = -1;
 
-  if (indice < 0 || indice >= heap->size) {
-    printf("Índice inválido.\n");
+  printf("Digite o identificador da aeronave: ");
+  scanf("%s", identificador);
+
+  for (int i = 0; i < heap->size; i++) {
+    if (strcmp(heap->aeronave[i].identificador, identificador) == 0) {
+      indice = i;
+      break;
+    }
+  }
+
+  if (indice == -1) {
+    printf("Aeronave com identificador %s não encontrada.\n", identificador);
     return heap;
   }
+
+  tempAeronave = heap->aeronave[indice];
 
   printf("Digite as novas informações (combustível, horário, tipo, "
          "emergência):\n");
@@ -151,19 +171,22 @@ MaxHeap *editarAeronave(MaxHeap *heap) {
     return heap;
   }
 
+  Aeronave novaAeronave =
+      criaAeronave(identificador, combustivel, horario, tipo, emergencia);
+
   int prioridadeAntiga = heap->aeronave[indice].prioridade;
-  Aeronave novaAeronave = criaAeronave(heap->aeronave[indice].identificador,
-                                       combustivel, horario, tipo, emergencia);
 
   heap->aeronave[indice] = heap->aeronave[heap->size - 1];
   heap->size--;
+
   insereAeronave(novaAeronave, heap);
+
   if (prioridadeAntiga < novaAeronave.prioridade) {
     heapifyUp(heap, indice);
   } else if (prioridadeAntiga > novaAeronave.prioridade) {
     heapifyDown(heap, indice);
   }
-  cmpLeftRight(heap);
+
   return heap;
 }
 
@@ -184,7 +207,6 @@ MaxHeap *carregaHeap(const char *caminho) {
     sscanf(linha, "%49[^,],%d,%d,%d,%d", identificador, &combustivel, &horario,
            &tipo, &emergencia);
 
-    // Aloca dinamicamente para o identificador
     char *identificadorCopia = (char *)malloc(strlen(identificador) + 1);
     if (identificadorCopia == NULL) {
       perror("Erro ao alocar memória para identificador");
@@ -201,7 +223,7 @@ MaxHeap *carregaHeap(const char *caminho) {
                                          horario, tipo, emergencia);
     novaAeronave.prioridade =
         calculaPrioridade(combustivel, horario, tipo, emergencia);
-    insereAeronave(novaAeronave, heap);
+    heap = insereAeronave(novaAeronave, heap);
 
     indice++;
   }

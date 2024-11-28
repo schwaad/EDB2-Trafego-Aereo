@@ -3,7 +3,7 @@
 void menuInicial() {
   printf("Digite a opção que deseja:\n");
   printf("1 - Criar novo sistema de controle\n2 - Carregar sistema de controle "
-         "existente\n0 - Sair");
+         "existente\n0 - Sair\n");
 }
 
 int menuInput() {
@@ -15,7 +15,7 @@ int menuInput() {
 void menuSistemaControle() {
   printf("Digite a opção que deseja:\n");
   printf("1 - Inserir aeronave\n2 - Editar aeronave\n3 - Remover primeira da "
-         "fila\n4 - Salvar heap\n0 - Voltar");
+         "fila\n4 - Salvar heap\n0 - Voltar\n");
 }
 
 void clearTerminal() {
