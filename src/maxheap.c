@@ -240,6 +240,9 @@ void salvaHeap(const MaxHeap *heap, const char *caminho) {
   }
 
   for (int i = 0; i < heap->size; i++) {
+    heap->aeronave[i]
+        .identificador[strcspn(heap->aeronave[i].identificador, "\n")] = 0;
+
     fprintf(arquivo, "%s,%d,%d,%d,%d\n", heap->aeronave[i].identificador,
             heap->aeronave[i].combustivel, heap->aeronave[i].horario,
             heap->aeronave[i].tipo, heap->aeronave[i].emergencia);

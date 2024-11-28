@@ -116,7 +116,6 @@ int main() {
 
           printf("Digite o identificador da aeronave:\n");
           fgets(identificador, 50, stdin);
-
           printf("Digite o combustível da aeronave:\n");
           scanf("%d", &combustivel);
 
